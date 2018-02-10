@@ -1,10 +1,15 @@
 package org.codemaker.archimig;
 
+import org.apache.commons.io.IOUtils;
+import org.codemaker.archimig.diagram.AsciiArtDiagramCreator;
+import org.codemaker.archimig.diagram.Diagram;
 import org.codemaker.archimig.model.descriptors.MigDescriptor;
 import org.codemaker.archimig.model.descriptors.MigStepDescriptor;
 import org.codemaker.archimig.model.migration.Migration;
 import org.codemaker.archimig.setup.MigrationGenerator;
 import org.codemaker.archimig.setup.TrafoDescriptorBuilder;
+
+import java.io.IOException;
 
 /**
  * @author Martin Leggewie
@@ -41,7 +46,13 @@ public class CaaMigrator {
 
     Migration migration = new MigrationGenerator(migDescriptor).generate();
 
-    System.out.println(migration.generateReport());
+    for (Diagram diagram : new AsciiArtDiagramCreator().create(migration)) {
+      try {
+        System.out.println(IOUtils.toString(diagram.getReader()));
+      } catch (IOException e) {
+        e.printStackTrace();
+      }
+    }
   }
 
 }
