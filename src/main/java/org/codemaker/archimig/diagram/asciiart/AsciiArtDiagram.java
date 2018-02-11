@@ -1,11 +1,13 @@
-package org.codemaker.archimig.diagram;
+package org.codemaker.archimig.diagram.asciiart;
+
+import org.codemaker.archimig.diagram.Diagram;
 
 import java.io.Reader;
 import java.io.StringReader;
 
 public final class AsciiArtDiagram implements Diagram {
 
-  private String asciiArtString;
+  private final String asciiArtString;
 
 
   public AsciiArtDiagram(String asciiArtString) {

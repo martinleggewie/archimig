@@ -5,8 +5,10 @@ import java.util.List;
 
 public final class StructureColumn {
 
-  private String title;
-  private List<StructureCell> cells = new ArrayList<StructureCell>();
+  public static final StructureColumn EMPTY_COLUMN = new StructureColumn("(empty)");
+
+  private final String title;
+  private final List<StructureCell> cells = new ArrayList<StructureCell>();
 
 
   public StructureColumn(String title) {
