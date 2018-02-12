@@ -37,9 +37,12 @@ public class CaaMigrator {
     MigStepDescriptor migStepDescriptor2 = new MigStepDescriptor("Schritt 2");
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addSystem("Client").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("UI").toSystem("Client").build());
+    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("Controller").toSystem("Client").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("API-Adapter").toSystem("Client")
         .build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("UI").toComponent
+        ("Controller").build());
+    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("Controller").toComponent
         ("API-Adapter").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("API-Adapter")
         .toComponent("API").build());

@@ -1,6 +1,7 @@
 package org.codemaker.archimig.diagram.asciiart;
 
 import org.codemaker.archimig.diagram.Structure;
+import org.codemaker.archimig.diagram.StructureCell;
 import org.codemaker.archimig.diagram.StructureColumn;
 
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_CORNER;
@@ -113,19 +114,19 @@ class AsciiArtDiagramBodyCreator {
     buffer.append(createFreeSpaceOutsideCell());
 
     // 2. Create top edge of the row
-    buffer.append(createCellEdge());
+    buffer.append(createCellEdge(rowindex));
 
     // 3. Create free space below the top edge but above the cell titles
-    buffer.append(createCellSpace());
+    buffer.append(createCellSpace(rowindex));
 
     // 4. Create cell titles
     buffer.append(createCellTitle(rowindex));
 
     // 5. Create free space below the cell titles but above the bottom edge
-    buffer.append(createCellSpace());
+    buffer.append(createCellSpace(rowindex));
 
     // 6. Create bottom edge of the row
-    buffer.append(createCellEdge());
+    buffer.append(createCellEdge(rowindex));
 
     return buffer.toString();
   }
@@ -152,7 +153,7 @@ class AsciiArtDiagramBodyCreator {
   }
 
 
-  private String createCellEdge() {
+  private String createCellEdge(int rowindex) {
     StringBuilder buffer = new StringBuilder();
 
     for (int col = 1; col <= structure.numberOfColumns(); col++) {
@@ -160,11 +161,24 @@ class AsciiArtDiagramBodyCreator {
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
-      buffer.append(CHAR_CORNER);
-      for (int i = 0; i < cellWidth; i++) {
-        buffer.append(CHAR_HORIZONTAL);
+
+      StructureColumn column = structure.getColumns().get(col - 1);
+      StructureCell cell = StructureCell.EMPTY_CELL;
+      if (!column.equals(StructureColumn.EMPTY_COLUMN)) {
+        cell = column.getCells().get(rowindex);
       }
-      buffer.append(CHAR_CORNER);
+      if (column.equals(StructureColumn.EMPTY_COLUMN) || cell.equals(StructureCell.EMPTY_CELL)) {
+        for (int i = 0; i < cellWidth + 2; i++) {
+          buffer.append(CHAR_WHITESPACE);
+        }
+      } else {
+        buffer.append(CHAR_CORNER);
+        for (int i = 0; i < cellWidth; i++) {
+          buffer.append(CHAR_HORIZONTAL);
+        }
+        buffer.append(CHAR_CORNER);
+      }
+
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
@@ -181,7 +195,7 @@ class AsciiArtDiagramBodyCreator {
   }
 
 
-  private String createCellSpace() {
+  private String createCellSpace(int rowindex) {
     StringBuilder buffer = new StringBuilder();
 
     for (int col = 1; col <= structure.numberOfColumns(); col++) {
@@ -189,11 +203,23 @@ class AsciiArtDiagramBodyCreator {
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
-      buffer.append(CHAR_VERTICAL);
-      for (int i = 0; i < cellWidth; i++) {
-        buffer.append(CHAR_WHITESPACE);
+
+      StructureColumn column = structure.getColumns().get(col - 1);
+      StructureCell cell = StructureCell.EMPTY_CELL;
+      if (!column.equals(StructureColumn.EMPTY_COLUMN)) {
+        cell = column.getCells().get(rowindex);
       }
-      buffer.append(CHAR_VERTICAL);
+      if (column.equals(StructureColumn.EMPTY_COLUMN) || cell.equals(StructureCell.EMPTY_CELL)) {
+        for (int i = 0; i < cellWidth + 2; i++) {
+          buffer.append(CHAR_WHITESPACE);
+        }
+      } else {
+        buffer.append(CHAR_VERTICAL);
+        for (int i = 0; i < cellWidth; i++) {
+          buffer.append(CHAR_WHITESPACE);
+        }
+        buffer.append(CHAR_VERTICAL);
+      }
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
@@ -218,14 +244,18 @@ class AsciiArtDiagramBodyCreator {
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
-      buffer.append(CHAR_VERTICAL);
 
       StructureColumn column = structure.getColumns().get(col - 1);
-      if (column.equals(StructureColumn.EMPTY_COLUMN)) {
-        for (int i = 0; i < cellWidth; i++) {
+      StructureCell cell = StructureCell.EMPTY_CELL;
+      if (!column.equals(StructureColumn.EMPTY_COLUMN)) {
+        cell = column.getCells().get(rowindex);
+      }
+      if (column.equals(StructureColumn.EMPTY_COLUMN) || cell.equals(StructureCell.EMPTY_CELL)) {
+        for (int i = 0; i < cellWidth + 2; i++) {
           buffer.append(CHAR_WHITESPACE);
         }
       } else {
+        buffer.append(CHAR_VERTICAL);
         String cellTitle = structure.getColumns().get(col - 1).getCells().get(rowindex).getTitle();
         int titlePaddingLeft = (cellWidth - cellTitle.length()) / 2;
         for (int i = 0; i < titlePaddingLeft; i++) {
@@ -236,8 +266,8 @@ class AsciiArtDiagramBodyCreator {
         for (int i = 0; i < titlePaddingRight; i++) {
           buffer.append(CHAR_WHITESPACE);
         }
+        buffer.append(CHAR_VERTICAL);
       }
-      buffer.append(CHAR_VERTICAL);
       for (int i = 0; i < PADDING_CELL; i++) {
         buffer.append(CHAR_WHITESPACE);
       }
