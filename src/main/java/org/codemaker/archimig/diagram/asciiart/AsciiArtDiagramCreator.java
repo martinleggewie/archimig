@@ -35,10 +35,11 @@ public final class AsciiArtDiagramCreator implements DiagramCreator {
     StringBuilder buffer = new StringBuilder();
 
     // 1. Create body (columns and cells and text contained in cells)
-    String body = new AsciiArtDiagramBodyCreator(structure).create();
+    AsciiArtDiagramBodyCreator bodyCreator = new AsciiArtDiagramBodyCreator(structure);
+    String body = bodyCreator.create();
 
     // 2. Create title
-    String title = new AsciiArtDiagramTitleCreator(structure).create();
+    String title = new AsciiArtDiagramTitleCreator(structure, bodyCreator.createdWidth()).create();
 
     // 3. Construct the whole thing
     buffer.append(title);

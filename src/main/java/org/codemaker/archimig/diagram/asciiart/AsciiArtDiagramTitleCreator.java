@@ -15,10 +15,12 @@ import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.PAD
 class AsciiArtDiagramTitleCreator {
 
   private final Structure structure;
+  private final int width;
 
 
-  AsciiArtDiagramTitleCreator(Structure structure) {
+  AsciiArtDiagramTitleCreator(Structure structure, int width) {
     this.structure = structure;
+    this.width = width;
   }
 
 
@@ -26,27 +28,28 @@ class AsciiArtDiagramTitleCreator {
 
     StringBuilder buffer = new StringBuilder();
     String title = structure.getTitle();
-    int titleWidth = PADDING_TEXT_HORIZONTAL + title.length() + PADDING_TEXT_HORIZONTAL;
 
     // 1. top line + vertical space above title line
-    buffer.append(createHorizontalEdgeLine(titleWidth));
-    buffer.append(createHorizontalSpaceLine(titleWidth));
+    buffer.append(createHorizontalEdgeLine(width));
+    buffer.append(createHorizontalSpaceLine(width));
 
     // 2. title line
+    int titlePaddingLeft = (width - 2 - title.length()) / 2;
     buffer.append(CHAR_VERTICAL);
-    for (int i = 0; i < PADDING_TEXT_HORIZONTAL; i++) {
+    for (int i = 0; i < titlePaddingLeft; i++) {
       buffer.append(CHAR_WHITESPACE);
     }
     buffer.append(title);
-    for (int i = 0; i < PADDING_TEXT_HORIZONTAL; i++) {
+    int titlePaddingRight = width - 2 - titlePaddingLeft - title.length();
+    for (int i = 0; i < titlePaddingRight; i++) {
       buffer.append(CHAR_WHITESPACE);
     }
     buffer.append(CHAR_VERTICAL);
     buffer.append("\n");
 
     // 3. vertical space below title line + bottom line
-    buffer.append(createHorizontalSpaceLine(titleWidth));
-    buffer.append(createHorizontalEdgeLine(titleWidth));
+    buffer.append(createHorizontalSpaceLine(width));
+    buffer.append(createHorizontalEdgeLine(width));
 
     return buffer.toString();
   }
@@ -55,7 +58,7 @@ class AsciiArtDiagramTitleCreator {
   private String createHorizontalEdgeLine(int titleWidth) {
     StringBuilder buffer = new StringBuilder();
     buffer.append(CHAR_CORNER);
-    for (int i = 0; i < titleWidth; i++) {
+    for (int i = 0; i < titleWidth - 2; i++) {
       buffer.append(CHAR_HORIZONTAL);
     }
     buffer.append(CHAR_CORNER);
@@ -68,7 +71,7 @@ class AsciiArtDiagramTitleCreator {
     StringBuilder buffer = new StringBuilder();
     for (int i = 0; i < PADDING_TEXT_VERTICAL; i++) {
       buffer.append(CHAR_VERTICAL);
-      for (int j = 0; j < titleWidth; j++) {
+      for (int j = 0; j < titleWidth - 2; j++) {
         buffer.append(CHAR_WHITESPACE);
       }
       buffer.append(CHAR_VERTICAL);

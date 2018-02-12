@@ -44,6 +44,11 @@ class AsciiArtDiagramBodyCreator {
   }
 
 
+  public int createdWidth() {
+    return createColumnEdge().length() - 1;
+  }
+
+
   private String createColumnEdge() {
     StringBuilder buffer = new StringBuilder();
 
