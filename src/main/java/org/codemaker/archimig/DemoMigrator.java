@@ -18,11 +18,11 @@ import java.util.List;
  * @author Martin Leggewie
  * @since 08.02.2018
  */
-public class CaaMigrator {
+public class DemoMigrator {
 
   public static void main(String[] args) {
 
-    MigStepDescriptor migStepDescriptor1 = new MigStepDescriptor("Schritt 1");
+    MigStepDescriptor migStepDescriptor1 = new MigStepDescriptor("Migration Step 1");
     migStepDescriptor1.addTrafoDescriptor(new TrafoDescriptorBuilder().addSystem("Server").build());
     migStepDescriptor1.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("API").toSystem("Server").build());
     migStepDescriptor1.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("Impl").toSystem("Server").build());
@@ -34,7 +34,7 @@ public class CaaMigrator {
     migStepDescriptor1.addTrafoDescriptor((new TrafoDescriptorBuilder().addDependencyFromComponent("Impl")
         .toComponent("Tables")).build());
 
-    MigStepDescriptor migStepDescriptor2 = new MigStepDescriptor("Schritt 2");
+    MigStepDescriptor migStepDescriptor2 = new MigStepDescriptor("Migration Step 2");
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addSystem("Client").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("UI").toSystem("Client").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("Controller").toSystem("Client").build());
