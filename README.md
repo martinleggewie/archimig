@@ -141,16 +141,22 @@ To achieve this flip-book concept, ArchiMig applies the following layout rules:
 
 * Each component is shown as a rectangle with landscape orientation, and it is located inside their system's rectangle. The component rectangles are also aligned to the hidden grid's rows. The size of all component rectangles of all systems are all the same. The component's name is placed in its rectangle's center.
 
-* Call dependencies are shown as arrows with a "dot" start and a "vee" end (check [https://www.graphviz.org/doc/info/arrows.html](https://www.graphviz.org/doc/info/arrows.html) for the explanation of what "dot" and "vee" looks like). These arrows are drawn as horizontal lines from left to right (if possible).
+* Call dependencies are shown as arrows with a "dot" start and a "vee" end (check [https://www.graphviz.org/doc/info/arrows.html](https://www.graphviz.org/doc/info/arrows.html) for the explanation of what "dot" and "vee" look like). These arrows are drawn as horizontal lines from left to right.
 
-* Inheritance dependencies are shown as arrows with a "dot" start and an "onormal" end (again, check [https://www.graphviz.org/doc/info/arrows.html](https://www.graphviz.org/doc/info/arrows.html) for the explanation of what "dot" and "onormal" looks like). These arrows are drawn as horizontal lines from right to left (if possible).
+* Inheritance dependencies are shown as arrows with a "dot" start and an "onormal" end (again, check [https://www.graphviz.org/doc/info/arrows.html](https://www.graphviz.org/doc/info/arrows.html) for the explanation of what "dot" and "onormal" look like). These arrows are drawn as horizontal lines from right to left.
 
-* If possible, crossing arrows have to be avoided.
+* If possible, crossing arrows have to be avoided. Since this most likely cannot be avoided when the migrated architecture gets bigger, the created diagrams will then have crossing arrows. To visualize that these arrows are not connected, the diagrams will indicate this by NOT having a "dot" at the crossing point. This is the reason why arrows start with a "dot" - this "dot" signals that arrows are really connected with its component.
 
-* Arrows are never ever drawn on top of each other.
+* Arrows are drawn (if possible) as horizontal lines. If it cannot be avoided, the arrows's path will only turn in 45 or 90 degrees angles.
+
+* Arrows are never ever drawn on top of each other. If there are many arrows located next to each other, this might even lead to a widening of the hidden grid.
 
 * Once a system or a component is located at a given place in the hidden grid, it will not leave this place anymore throughout the whole migration. In addition, this location is not used by other components. Each system or component gets its space, it is reserved just for it, and nothing else will be located there.
 
+
+The requirements defined in above lists have quite some effect on diagram creation.
+The most important is that creating a diagram for a given step cannot be done without being aware of all other steps.
+The algorithm which determines the dimensions of the hidden grid and locates all rectangles and arrows needs to first collect informationen from all steps before it can start with its layout work.
 
 
 
