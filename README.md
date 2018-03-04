@@ -3,18 +3,18 @@
 
 # What is it all about?
 
-ArchiMig's lets you create a sequence of diagrams which show - like a flip-book - a sequence of steps for migrating an IT system architecture.
+ArchiMig lets you create a sequence of diagrams which show - like a flip-book - a sequence of steps for migrating an IT system architecture.
 
-The goal is that you can then use these diagrams to communicate the migration to your co-workers and your management.
-As it is typical for such discussions, many iterations are needed, and each iteration might and most like will reveal changes which need to be added to these diagrams.
-Now, ArchiMig allows you to have these changes flown back into the diagrams without the need to meticulously and most of the time painstakingly change these diagrams manually.
+The goal is that you can use these diagrams to communicate the migration to your co-workers and your management.
+As it is typical for such discussions, many iterations will be needed, and each iteration might and most like will reveal changes which need to be added to these diagrams.
+Now, ArchiMig allows you to have these changes flown back into the diagrams without the need to meticulously and painstakingly change these diagrams manually.
 
 The key concept is that you model the whole migration as a sequence of steps.
 Each step defines which parts of your architecture are added, changed, deleted, or connected to each other.
 These steps do not "know" anything about a diagram - instead, you describe the various transformations from the architecture's perspective.
 After you have modeled the migration and its steps, ArchiMig will then take this model and create a sequence of diagrams, one for each modeled step.
-Changes to these diagrams are actually changes to the migration model.
-After you have modeled these changes, you only need to re-run ArchiMig which will create a new sequence of diagrams which represent the changed version of the migration steps.
+Changes to these diagrams only need to be done by changing the migration model.
+After you have applied these changes to the model, you only need to re-run ArchiMig which will create a new sequence of diagrams which represent the changed version of the model.
 
 
 # Hello World
