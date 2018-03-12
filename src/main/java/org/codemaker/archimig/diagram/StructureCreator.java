@@ -1,12 +1,12 @@
 package org.codemaker.archimig.diagram;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.codemaker.archimig.model.architecture.Component;
 import org.codemaker.archimig.model.architecture.RunningSystem;
 import org.codemaker.archimig.model.migration.Migration;
 import org.codemaker.archimig.model.migration.MigrationStep;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public final class StructureCreator {
 
@@ -21,9 +21,13 @@ public final class StructureCreator {
 
   public List<Structure> create() {
     List<Structure> result = new ArrayList<Structure>();
-    int numberOfCellsPerColumn = determineNumberOfCellsPerColumn();
-    int numberOfColumns = determineNumberOfColumns();
-    int numberOfCharactersPerCellTitle = determineNumberOfCharactersPerCellTitle();
+
+    AllStructure allStructure = createAllStructure();
+
+    int numberOfCellsPerColumn = allStructure.determineNumberOfCellsPerColumn();
+    int numberOfColumns = allStructure.determineNumberOfColumns();
+    int numberOfCharactersPerCellTitle = allStructure.determineNumberOfCharactersPerCellTitle();
+
 
     for (MigrationStep migrationStep : migration.getMigrationSteps()) {
 
@@ -58,45 +62,30 @@ public final class StructureCreator {
   }
 
 
-  private int determineNumberOfColumns() {
-    int maxNumberOfColumns = 0;
-
-    for (MigrationStep migrationStep : migration.getMigrationSteps()) {
-      if (migrationStep.getSystems().size() > maxNumberOfColumns) {
-        maxNumberOfColumns = migrationStep.getSystems().size();
-      }
-    }
-    return maxNumberOfColumns;
-  }
-
-
-  private int determineNumberOfCellsPerColumn() {
-    int maxNumberOfCellsPerColumn = 0;
+  /**
+   * Collects all defined systems, components, and connections and stores them in the one AllStructure instance.
+   */
+  private AllStructure createAllStructure() {
+    AllStructure allStructure = new AllStructure();
 
     for (MigrationStep migrationStep : migration.getMigrationSteps()) {
       for (RunningSystem system : migrationStep.getSystems()) {
-        if (system.getComponents().size() > maxNumberOfCellsPerColumn) {
-          maxNumberOfCellsPerColumn = system.getComponents().size();
+        StructureColumn column = allStructure.findColumn(system.getName());
+        if (column == null) {
+          column = new StructureColumn(system.getName());
+          allStructure.getColumns().add(column);
         }
-      }
-    }
-    return maxNumberOfCellsPerColumn;
-  }
 
-
-  private int determineNumberOfCharactersPerCellTitle() {
-    int maxNumberOfCharactersPerCellTitle = 0;
-
-    for (MigrationStep migrationStep : migration.getMigrationSteps()) {
-      for (RunningSystem system : migrationStep.getSystems()) {
         for (Component component : system.getComponents()) {
-          if (component.getName().length() > maxNumberOfCharactersPerCellTitle) {
-            maxNumberOfCharactersPerCellTitle = component.getName().length();
+          StructureCell cell = allStructure.findCell(component.getName());
+          if (cell == null) {
+            cell = new StructureCell(component.getName());
+            column.getCells().add(cell);
           }
         }
       }
     }
-    return maxNumberOfCharactersPerCellTitle;
+    return allStructure;
   }
 
 }
