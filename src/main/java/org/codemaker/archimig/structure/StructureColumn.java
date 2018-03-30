@@ -1,4 +1,4 @@
-package org.codemaker.archimig.diagram;
+package org.codemaker.archimig.structure;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,5 +23,23 @@ public final class StructureColumn {
 
   public List<StructureCell> getCells() {
     return cells;
+  }
+
+  public int numberOfOutgoingCells() {
+    int result = 0;
+
+    for (StructureCell cell : cells) {
+      result += cell.getOutgoingCells().size();
+    }
+    return result;
+  }
+
+  public int numberOfIncomingCells() {
+    int result = 0;
+
+    for (StructureCell cell : cells) {
+      result += cell.getIncomingCells().size();
+    }
+    return result;
   }
 }

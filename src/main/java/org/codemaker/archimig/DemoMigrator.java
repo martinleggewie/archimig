@@ -3,8 +3,8 @@ package org.codemaker.archimig;
 import org.apache.commons.io.IOUtils;
 import org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator;
 import org.codemaker.archimig.diagram.Diagram;
-import org.codemaker.archimig.diagram.Structure;
-import org.codemaker.archimig.diagram.StructureCreator;
+import org.codemaker.archimig.structure.Structure;
+import org.codemaker.archimig.structure.StructureCreator;
 import org.codemaker.archimig.model.descriptors.MigDescriptor;
 import org.codemaker.archimig.model.descriptors.MigStepDescriptor;
 import org.codemaker.archimig.model.migration.Migration;
@@ -29,8 +29,8 @@ public class DemoMigrator {
     migStepDescriptor1.addTrafoDescriptor(new TrafoDescriptorBuilder().addSystem("Database").build());
     migStepDescriptor1.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("Tables").toSystem("Database")
         .build());
-    migStepDescriptor1.addTrafoDescriptor((new TrafoDescriptorBuilder().addDependencyFromComponent("Impl")
-        .toComponent("API")).build());
+//    migStepDescriptor1.addTrafoDescriptor((new TrafoDescriptorBuilder().addDependencyFromComponent("Impl")
+//        .toComponent("API")).build());
     migStepDescriptor1.addTrafoDescriptor((new TrafoDescriptorBuilder().addDependencyFromComponent("Impl")
         .toComponent("Tables")).build());
 
@@ -40,10 +40,10 @@ public class DemoMigrator {
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("Controller").toSystem("Client").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addComponent("API-Adapter").toSystem("Client")
         .build());
-    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("UI").toComponent
-        ("Controller").build());
-    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("Controller").toComponent
-        ("API-Adapter").build());
+//    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("UI").toComponent
+//        ("Controller").build());
+//    migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("Controller").toComponent
+//        ("API-Adapter").build());
     migStepDescriptor2.addTrafoDescriptor(new TrafoDescriptorBuilder().addDependencyFromComponent("API-Adapter")
         .toComponent("API").build());
 

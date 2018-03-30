@@ -1,7 +1,7 @@
 package org.codemaker.archimig.diagram.asciiart;
 
 import org.codemaker.archimig.diagram.DiagramCreator;
-import org.codemaker.archimig.diagram.Structure;
+import org.codemaker.archimig.structure.Structure;
 
 import java.util.ArrayList;
 import java.util.List;

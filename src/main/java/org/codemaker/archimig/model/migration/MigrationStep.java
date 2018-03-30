@@ -67,4 +67,21 @@ public final class MigrationStep {
   public List<RunningSystem> getSystems() {
     return systems;
   }
+
+  public boolean containsSystem(String systemName) {
+    for (RunningSystem system : systems) {
+      if (system.getName().equals(systemName)) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  public boolean containsComponentInSystem(String componentName, String systemName) {
+    RunningSystem system = Toolbox.findSystemByName(systems, systemName);
+    if (system == null) {
+      return false;
+    }
+    return Toolbox.findComponentByName(system, componentName) != null;
+  }
 }

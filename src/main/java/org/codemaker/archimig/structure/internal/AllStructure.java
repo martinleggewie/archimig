@@ -1,4 +1,7 @@
-package org.codemaker.archimig.diagram;
+package org.codemaker.archimig.structure.internal;
+
+import org.codemaker.archimig.structure.StructureCell;
+import org.codemaker.archimig.structure.StructureColumn;
 
 import java.util.ArrayList;
 import java.util.List;

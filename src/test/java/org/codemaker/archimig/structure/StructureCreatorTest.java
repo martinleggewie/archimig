@@ -1,9 +1,13 @@
-package org.codemaker.archimig.diagram;
+package org.codemaker.archimig.structure;
 
 import org.codemaker.archimig.model.architecture.Component;
 import org.codemaker.archimig.model.architecture.RunningSystem;
 import org.codemaker.archimig.model.migration.Migration;
 import org.codemaker.archimig.model.migration.MigrationStep;
+import org.codemaker.archimig.structure.Structure;
+import org.codemaker.archimig.structure.StructureCell;
+import org.codemaker.archimig.structure.StructureColumn;
+import org.codemaker.archimig.structure.StructureCreator;
 import org.junit.Test;
 
 import java.util.List;
@@ -225,6 +229,86 @@ public class StructureCreatorTest {
 
       assertEquals("Component 1.1".length(), structure2.getNumberOfCharactersPerCellTitle());
     }
+  }
+
+
+  @Test
+  public void testCreateStructureOneStepThreeSystemsWithComponentDependencies() {
+
+    // 1. Assign
+    RunningSystem system1 = new RunningSystem("System 1");
+    Component component11 = new Component("Component 1.1");
+    Component component12 = new Component("Component 1.2");
+    system1.addComponent(component11);
+    system1.addComponent(component12);
+
+    RunningSystem system2 = new RunningSystem("System 2");
+    Component component21 = new Component("Component 2.1");
+    Component component22 = new Component("Component 2.2");
+    Component component23 = new Component("Component 2.3");
+    Component component24 = new Component("Component 2.4");
+    system2.addComponent(component21);
+    system2.addComponent(component22);
+    system2.addComponent(component23);
+    system2.addComponent(component24);
+
+    RunningSystem system3 = new RunningSystem("System 3");
+    Component component31 = new Component("Component 3.1");
+    Component component32 = new Component("Component 3.2");
+    Component component33 = new Component("Component 3.3");
+    system3.addComponent(component31);
+    system3.addComponent(component32);
+    system3.addComponent(component33);
+
+    component31.addDependencyTo(component21);
+    component21.addDependencyTo(component11);
+
+    Migration migration = new Migration();
+    MigrationStep migrationStep1 = new MigrationStep("Step 1");
+    migrationStep1.addSystem(system1);
+    migrationStep1.addSystem(system2);
+    migrationStep1.addSystem(system3);
+    migration.addMigrationStep(migrationStep1);
+
+    // 2. Act
+    List<Structure> structures = new StructureCreator(migration).create();
+
+    // 3. Assert
+    assertEquals(1, structures.size());
+    Structure structure = structures.get(0);
+    assertEquals(3, structure.getColumns().size());
+
+    StructureColumn structureColumn1 = structure.getColumns().get(0);
+    assertEquals("System 3", structureColumn1.getTitle());
+    List<StructureCell> structureCells1 = structureColumn1.getCells();
+    assertEquals(4, structureCells1.size());
+    assertEquals("Component 3.1", structureCells1.get(0).getTitle());
+    assertEquals("Component 3.2", structureCells1.get(1).getTitle());
+    assertEquals("Component 3.3", structureCells1.get(2).getTitle());
+    assertEquals(StructureCell.EMPTY_CELL, structureCells1.get(3));
+
+    StructureColumn structureColumn2 = structure.getColumns().get(1);
+    assertEquals("System 2", structureColumn2.getTitle());
+    List<StructureCell> structureCells2 = structureColumn2.getCells();
+    assertEquals(4, structureCells2.size());
+    assertEquals("Component 2.1", structureCells2.get(0).getTitle());
+    assertEquals("Component 2.2", structureCells2.get(1).getTitle());
+    assertEquals("Component 2.3", structureCells2.get(2).getTitle());
+    assertEquals("Component 2.4", structureCells2.get(3).getTitle());
+
+    StructureColumn structureColumn3 = structure.getColumns().get(2);
+    assertEquals("System 1", structureColumn3.getTitle());
+    List<StructureCell> structureCells3 = structureColumn3.getCells();
+    assertEquals(4, structureCells3.size());
+    assertEquals("Component 1.1", structureCells3.get(0).getTitle());
+    assertEquals("Component 1.2", structureCells3.get(1).getTitle());
+    assertEquals(StructureCell.EMPTY_CELL, structureCells3.get(2));
+    assertEquals(StructureCell.EMPTY_CELL, structureCells3.get(3));
+
+    assertEquals(3, structure.numberOfColumns());
+    assertEquals(4, structure.numberOfCellsPerColumn());
+
+    assertEquals("Component 1.1".length(), structure.getNumberOfCharactersPerCellTitle());
   }
 
 }

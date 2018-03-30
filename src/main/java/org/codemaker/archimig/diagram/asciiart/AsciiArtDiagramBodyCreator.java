@@ -1,8 +1,8 @@
 package org.codemaker.archimig.diagram.asciiart;
 
-import org.codemaker.archimig.diagram.Structure;
-import org.codemaker.archimig.diagram.StructureCell;
-import org.codemaker.archimig.diagram.StructureColumn;
+import org.codemaker.archimig.structure.Structure;
+import org.codemaker.archimig.structure.StructureCell;
+import org.codemaker.archimig.structure.StructureColumn;
 
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_CORNER;
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_HORIZONTAL;

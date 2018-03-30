@@ -1,15 +1,11 @@
 package org.codemaker.archimig.diagram.asciiart;
 
-import org.codemaker.archimig.diagram.Structure;
-import org.codemaker.archimig.model.architecture.Component;
-import org.codemaker.archimig.model.architecture.RunningSystem;
-import org.codemaker.archimig.model.migration.MigrationStep;
+import org.codemaker.archimig.structure.Structure;
 
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_CORNER;
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_HORIZONTAL;
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_VERTICAL;
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.CHAR_WHITESPACE;
-import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.PADDING_TEXT_HORIZONTAL;
 import static org.codemaker.archimig.diagram.asciiart.AsciiArtDiagramCreator.PADDING_TEXT_VERTICAL;
 
 class AsciiArtDiagramTitleCreator {

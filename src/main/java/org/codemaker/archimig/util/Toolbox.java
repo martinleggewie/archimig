@@ -9,21 +9,29 @@ public final class Toolbox {
   private Toolbox() {
   }
 
-  public static RunningSystem findSystemByName(List<RunningSystem> systems, String name) {
+  public static RunningSystem findSystemByName(List<RunningSystem> systems, String systemName) {
     for (RunningSystem system : systems) {
-      if (system.getName().equals(name)) {
+      if (system.getName().equals(systemName)) {
         return system;
       }
     }
     return null;
   }
 
-  public static Component findComponentByName(List<RunningSystem> systems, String name) {
+  public static Component findComponentByName(List<RunningSystem> systems, String componentName) {
     for (RunningSystem system : systems) {
-      for (Component component : system.getComponents()) {
-        if (component.getName().equals(name)) {
-          return component;
-        }
+      Component component = findComponentByName(system, componentName);
+      if (component != null) {
+        return component;
+      }
+    }
+    return null;
+  }
+
+  public static Component findComponentByName(RunningSystem system, String componentName) {
+    for (Component component : system.getComponents()) {
+      if (component.getName().equals(componentName)) {
+        return component;
       }
     }
     return null;
