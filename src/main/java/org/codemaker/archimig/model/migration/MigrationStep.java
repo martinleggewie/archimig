@@ -8,6 +8,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Contains all information about one migration step which our algorithms have collected at runtime, based on the
+ * information collected from the descriptors. For each defined MigStepDescriptor there is one instance of
+ * MigrationStep. But in contrast to its descriptor, MigrationStep does not care about transformations any more, but
+ * about the current state of systems, components, and functionalities.
+ *
  * @author Martin Leggewie
  * @since 08.02.2018
  */

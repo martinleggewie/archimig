@@ -13,6 +13,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * As the name implies: creates an AllStructure, based on the information found in the give Migration instance.
+ *
+ * @author Martin Leggewie
+ * @since 30.03.2018
+ */
 public class AllStructureCreator {
 
   private Migration migration;
@@ -58,7 +64,7 @@ public class AllStructureCreator {
       }
     }
 
-    // ... connect all cells with each other in both dependency directions ...
+    // ... connect all cells with each other in both directions ...
     for (MigrationStep migrationStep : migration.getMigrationSteps()) {
       for (RunningSystem system : migrationStep.getSystems()) {
         for (Component component : system.getComponents()) {

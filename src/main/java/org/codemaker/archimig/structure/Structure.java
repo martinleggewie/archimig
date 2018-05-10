@@ -3,6 +3,14 @@ package org.codemaker.archimig.structure;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * While TrafoDescriptors and Migrations describe the system environment itself (they "know" about systems, components
+ * and their transformations), a Structure only takes care about the intended visualizations. A Structure contains
+ * columns, cells, and connecting lines.
+ *
+ * @author Martin Leggewie
+ * @since 11.02.2018
+ */
 public final class Structure {
 
   private final String title;

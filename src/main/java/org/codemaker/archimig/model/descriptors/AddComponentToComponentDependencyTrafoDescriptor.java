@@ -1,6 +1,8 @@
 package org.codemaker.archimig.model.descriptors;
 
 /**
+ * Concrete transformation description which describes that one component shall get a dependency to another component.
+ *
  * @author Martin Leggewie
  * @since 09.02.2018
  */

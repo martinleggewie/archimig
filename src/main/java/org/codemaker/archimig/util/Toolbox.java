@@ -5,6 +5,12 @@ import org.codemaker.archimig.model.architecture.RunningSystem;
 
 import java.util.List;
 
+/**
+ * Collection of useful functions which don't fit well to one of the other classes.
+ *
+ * @author Martin Leggewie
+ * @since 10.02.2018
+ */
 public final class Toolbox {
   private Toolbox() {
   }

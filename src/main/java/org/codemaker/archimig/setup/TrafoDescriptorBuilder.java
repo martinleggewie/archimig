@@ -6,6 +6,9 @@ import org.codemaker.archimig.model.descriptors.AddSystemTrafoDescriptor;
 import org.codemaker.archimig.model.descriptors.TrafoDescriptor;
 
 /**
+ * Builder which helps creating instances of the needed transformation descriptors. Goal is to be able to define such
+ * descriptor in a fluent API.
+ *
  * @author Martin Leggewie
  * @since 08.02.2018
  */
@@ -68,8 +71,7 @@ public class TrafoDescriptorBuilder {
     } else if (runningSystemName != null && componentSourceName != null && componentDestinationName == null && functionalityName == null) {
       // AddComponentToSystemTrafoDescriptor
       return new AddComponentToSystemTrafoDescriptor(componentSourceName, runningSystemName);
-    } else if (runningSystemName == null && componentSourceName != null && componentDestinationName != null
-        && functionalityName == null) {
+    } else if (runningSystemName == null && componentSourceName != null && componentDestinationName != null && functionalityName == null) {
       return new AddComponentToComponentDependencyTrafoDescriptor(componentSourceName, componentDestinationName);
     } else {
       throw new IllegalStateException("No fitting TrafoDescriptor found with current TrafoDescriptorBuilder: " + this);

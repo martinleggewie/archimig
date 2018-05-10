@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Simple container for all transformation descriptions which shall happen in one so-called migration step.
+ *
  * @author Martin Leggewie
  * @since 06.02.2018
  */

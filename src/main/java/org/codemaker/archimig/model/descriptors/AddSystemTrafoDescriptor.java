@@ -1,6 +1,8 @@
 package org.codemaker.archimig.model.descriptors;
 
 /**
+ * Concrete transformation description which describes that one system shall be added to the system environment.
+ *
  * @author Martin Leggewie
  * @since 08.02.2018
  */

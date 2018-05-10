@@ -12,6 +12,13 @@ import org.codemaker.archimig.model.migration.Migration;
 import org.codemaker.archimig.model.migration.MigrationStep;
 import org.codemaker.archimig.util.Toolbox;
 
+/**
+ * Main implementation for creating a Migration out of its corresponding descriptors. The created Migration is destined
+ * to be directly used by the following visualization algorithms.
+ *
+ * @author Martin Leggewie
+ * @since 08.02.2018
+ */
 public class MigrationGenerator {
 
   private final MigDescriptor migDescriptor;
@@ -26,9 +33,7 @@ public class MigrationGenerator {
     MigrationStep previousMigrationStep = null;
 
     for (MigStepDescriptor migStepDescriptor : migDescriptor.getMigStepDescriptors()) {
-      MigrationStep migrationStep = previousMigrationStep == null ?
-          new MigrationStep(migStepDescriptor.getName()) :
-          new MigrationStep(migStepDescriptor.getName(), previousMigrationStep);
+      MigrationStep migrationStep = previousMigrationStep == null ? new MigrationStep(migStepDescriptor.getName()) : new MigrationStep(migStepDescriptor.getName(), previousMigrationStep);
       result.addMigrationStep(migrationStep);
 
       for (TrafoDescriptor trafoDescriptor : migStepDescriptor.getTrafoDescriptors()) {
@@ -59,8 +64,7 @@ public class MigrationGenerator {
           if (fromComponent != null && toComponent != null) {
             fromComponent.addDependencyTo(toComponent);
           } else {
-            throw new IllegalArgumentException(
-                "FromComponent " + fromComponentName + " and/or ToComponent " + toComponentName + " not found.");
+            throw new IllegalArgumentException("FromComponent " + fromComponentName + " and/or ToComponent " + toComponentName + " not found.");
           }
         }
       }

@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
+ * Defines one group of functionalities which are so self-contained that it could be delivered as an artifact. A
+ * component cannot live on its own, but needs to always be part of a running system (but this fact is hidden from the
+ * component - only the whole Migration and its steps "know" about this constraint.
+ *
  * @author Martin Leggewie
  * @since 06.02.2018
  */

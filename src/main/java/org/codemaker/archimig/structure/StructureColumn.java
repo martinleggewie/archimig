@@ -3,6 +3,14 @@ package org.codemaker.archimig.structure;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents one column (= a rectangle-like shape). A column is different from just a rectangle because it "knows"
+ * about its internal cells.
+ *
+ * @author Martin Leggewie
+ * @since 11.02.2018
+ */
+
 public final class StructureColumn {
 
   public static final StructureColumn EMPTY_COLUMN = new StructureColumn("(empty)");

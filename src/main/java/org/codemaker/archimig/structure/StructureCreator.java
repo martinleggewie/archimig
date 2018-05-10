@@ -10,6 +10,12 @@ import org.codemaker.archimig.model.migration.MigrationStep;
 import org.codemaker.archimig.structure.internal.AllStructure;
 import org.codemaker.archimig.structure.internal.AllStructureCreator;
 
+/**
+ * As the name implies, this StructureCreateo creates a Structure. Well.
+ *
+ * @author Martin Leggewie
+ * @since 30.03.2018
+ */
 public final class StructureCreator {
 
 
