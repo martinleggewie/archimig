@@ -11,7 +11,8 @@ import org.codemaker.archimig.structure.internal.AllStructure;
 import org.codemaker.archimig.structure.internal.AllStructureCreator;
 
 /**
- * As the name implies, this StructureCreateo creates a Structure. Well.
+ * As the name implies, this StructureCreateo creates a Structure. Well, in fact it creates a list of Structure instance
+ * with each representing one source for the later visualization.
  *
  * @author Martin Leggewie
  * @since 30.03.2018

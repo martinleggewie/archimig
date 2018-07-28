@@ -10,7 +10,6 @@ import java.util.List;
  * @author Martin Leggewie
  * @since 11.02.2018
  */
-
 public final class StructureColumn {
 
   public static final StructureColumn EMPTY_COLUMN = new StructureColumn("(empty)");
